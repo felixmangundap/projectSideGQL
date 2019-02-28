@@ -1,0 +1,20 @@
+{
+  "name": "project:Side-Server",
+  "version": "1.0.0",
+  "description": "Server for Project Side",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "graphql-yoga": "^1.17.4",
+    "jsonwebtoken": "^8.5.0",
+    "prisma": "^1.27.1",
+    "prisma-client-lib": "^1.27.1"
+  }
+}

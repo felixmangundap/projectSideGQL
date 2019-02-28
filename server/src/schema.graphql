@@ -1,0 +1,99 @@
+type Query {
+  info: String!
+  feed(filter: String, skip: Int, first: Int, orderBy: ProjectOrderByInput): Feed!
+  project(id: ID!): Project!
+  projects(userId: ID!): [Project!]!
+  user(id: ID!): User!
+}
+
+type Mutation {
+  projectCreate(info: InfoInput!, urls: URLInput): Project!
+  projectDelete(id: ID!): Project!
+  projectUpdate(id: ID!, info: InfoInput, urls: URLInput): Project!
+  userLogin(email: String!, password: String!): AuthPayload
+  userSignup(email: String!, password: String!, name: String!): AuthPayload
+  userUpdate(email: String!, name: String!): AuthPayload
+  userUpdatePassword(newPassword: String!, oldPassword: String!): AuthPayload
+  vote(projectId: ID!): Vote
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  projects: [Project!]!
+}
+
+type Project {
+  id: ID!
+  info: Info
+  urls: URL
+  creator: User
+  votes: [Vote!]!
+}
+
+type Vote {
+  id: ID!
+  project: Project!
+  user: User!
+}
+
+type URL {
+  devpost: String
+  github: String
+  slack: String
+  instagram: String
+  twitter: String
+  web: String
+  imagesUrl: [String]
+}
+
+input URLInput {
+  devpost: String
+  github: String
+  slack: String
+  instagram: String
+  twitter: String
+  web: String
+  imagesUrl: [String]
+}
+
+type Info {
+  title: String!
+  oneLiner: String!
+  description: String!
+  stage: Int!
+  private: Boolean!
+}
+
+input InfoInput {
+  title: String!
+  oneLiner: String!
+  description: String!
+  stage: Int!
+  private: Boolean!
+}
+
+type Subscription {
+  newProject: Project
+  newVote: Vote
+}
+
+type Feed {
+  projects: [Project!]!
+  count: Int!
+}
+
+enum ProjectOrderByInput {
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
+}

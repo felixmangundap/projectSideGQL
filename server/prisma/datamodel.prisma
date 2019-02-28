@@ -1,0 +1,41 @@
+type Project {
+  id: ID! @unique
+  createdAt: DateTime!
+  info: Info
+  urls: URL
+  creator: User
+  votes: [Vote!]!
+}
+
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  projects: [Project!]!
+  votes: [Vote!]!
+}
+
+type Vote {
+  id: ID! @unique
+  project: Project!
+  user: User!
+}
+
+type URL {
+  devpost: String
+  github: String
+  slack: String
+  instagram: String
+  twitter: String
+  web: String
+  imagesUrl: [String]
+}
+
+type Info {
+  title: String!
+  oneLiner: String!
+  description: String!
+  stage: Int!
+  private: Boolean! @default(value: "true")
+}
